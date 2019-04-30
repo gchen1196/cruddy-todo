@@ -23,18 +23,17 @@ exports.create = (text, callback) => {
 //iterates through items array 
 exports.readAll = (callback) => {
   fs.readdir(`${exports.dataDir}`, (err, files) => {
-    if(err) {
+    if (err) {
       console.log(`No Files found in ${exports.dataDir}`);
     } else {
       callback(null, files);
     }
-  })
-  // callback(null, data);
+  });
 };
 
 exports.readOne = (id, callback) => {
-  fs.readFile(`${exports.dataDir}/${id}.txt`, 'utf8', (err,data) => {
-    if(err) {
+  fs.readFile(`${exports.dataDir}/${id}.txt`, 'utf8', (err, data) => {
+    if (err) {
       callback('file not found');
     } else {
       callback(null, {id: id, text: data});
@@ -53,20 +52,20 @@ exports.update = (id, text, callback) => {
       fs.writeFile(`${exports.dataDir}/${id}.txt`, text, (err) => {
         if (err) {
           callback(err);
-        }else {
+        } else {
           callback(null, text)
-        }
+        };
       })
-    }
-  })
+    };
+  });
 };
       
 
 exports.delete = (id, callback) => {
  fs.unlink(`${exports.dataDir}/${id}.txt`, (err) => {
-   if(err) {
+    if (err) {
      callback(err);
-   } else {
+    } else {
      callback()
    }
  })
