@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const _ = require('underscore');
 const counter = require('./counter');
+const fsFunctions = Promise.promisifyAll(fs);
 
 var items = {};
 
@@ -29,6 +30,7 @@ exports.readAll = (callback) => {
       callback(null, files);
     }
   });
+  
 };
 
 exports.readOne = (id, callback) => {
@@ -75,8 +77,7 @@ exports.delete = (id, callback) => {
 
 exports.dataDir = path.join(__dirname, 'data');
 
-exports.initialize = () => {
-  if (!fs.existsSync(exports.dataDir)) {
+exports.initialize = () => {   if (!fs.existsSync(exports.dataDir)) {
     fs.mkdirSync(exports.dataDir);
   }
 };
